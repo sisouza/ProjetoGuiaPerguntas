@@ -1,40 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GuiaPerguntas</title>
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/styles.css">
-</head>
+<%- include('./partials/header') %>
 <body>
-    <nav class="navbar navbar-light bg-light">
-        <a href="/">
-
-        </a>
-    </nav> 
+    <%- include('./partials/navbar') %>
     <div class="container">
-        <div class="card">
+        <div class="card" id="formulario-perguntar">
             <div class="card-header">
                 <h3>Realizar Perguntas</h3>
             </div>
             <div class="card-body">
-                <form>
+                <form method="POST" action="/salvarpergunta">
                     <label>Titulo</label>
-                    <input type="text" placeholder="Titulo" class="form-control">
+                    <input type="text" name="titulo" placeholder="Titulo" class="form-control">
                     <br><label>Descrição</label>
-                    <textarea placeholder="Descreva sua Pergunta Aqui" class="form-control"></textarea>
+                    <textarea name="descricao"  placeholder="Descreva sua Pergunta Aqui" class="form-control"></textarea>
                     <br>
-                    <button class="btn btn-primary"></button>
+                    <button class="btn btn-primary">Perguntar</button>
                 </form>
             </div>
         </div>
-    </div>
- 
-    
+    </div>  
 </body>
-<!-- incluindo o frame bootstrap-->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="/js/bootstrap.min.js"></script>
-</html>
+<%- include ('./partials/footer') %>
+
