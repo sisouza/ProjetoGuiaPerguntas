@@ -3,6 +3,9 @@ const app = express();
 const bodyParser  = require("body-parser")
 const connection = require("./database/database");
 const Pergunta = require("./database/Pergunta");
+const Resposta = require("./database/Resposta");
+
+
 //testando a conexao
 connection
     .authenticate()
@@ -52,16 +55,33 @@ app.post("/salvarpergunta",(req, res)=> {
 });
 
 app.get("/pergunta/:id",(req,res) =>{
-    var id = req.param.id;
+    var id = req.params.id;
     Pergunta.findOne({
         where: {id: id}
-    }).then(pergunta =>{
+    }).then(pergunta => {
         if(pergunta != undefined){
-            res.render("pergunta");
+            //caso a pergunta seja encontrada, exibindo a view da pergunta
+            res.render("pergunta",{
+                pergunta: pergunta
+        }); 
         }else{
            res.redirect("/"); 
         }
     });
 })
+
+//rota respostas
+
+app.post("/responder",(req,res)=>{
+    var corpo = req.body.corpo;
+    var idPergunta = req.body.pergunta;
+    Resposta.create({
+        corpo: corpo,
+        idPergunta: idPergunta
+    }).then(()=>{
+//redirecionando para a pag da pergunta
+        res.redirect("/pergunta/"+idPergunta);
+    }); 
+});
 
 app.listen(8080,() => {console.log("App executando...");});
