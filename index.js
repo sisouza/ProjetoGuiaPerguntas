@@ -59,11 +59,20 @@ app.get("/pergunta/:id",(req,res) =>{
     Pergunta.findOne({
         where: {id: id}
     }).then(pergunta => {
-        if(pergunta != undefined){
-            //caso a pergunta seja encontrada, exibindo a view da pergunta
-            res.render("pergunta",{
-                pergunta: pergunta
-        }); 
+        if(pergunta != undefined){//caso a pergunta seja encontrada, exibindo a view da pergunta
+
+            Resposta.findAll({
+//Comparando o registro do banco com a pergunta passada na pag
+                where: {idPergunta: pergunta.id},
+                order: [
+                    ['id','DESC']
+                ]
+            }).then(respostas => {
+                res.render("pergunta",{
+                    pergunta: pergunta,
+                    respostas: respostas
+            });
+        });
         }else{
            res.redirect("/"); 
         }
