@@ -88,6 +88,7 @@ app.post("/responder",(req,res)=>{
         corpo: corpo,
         idPergunta: idPergunta
     }).then(()=>{
+        
 //redirecionando para a pag da pergunta
         res.redirect("/pergunta/"+idPergunta);
     }); 
